@@ -1,0 +1,147 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffc107; /* Changed navbar color */
+    padding: 10px 30px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbarsub1 {
+    display: flex;
+    align-items: center;
+}
+
+.navbarsub1 h3 {
+    margin-left: 10px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.navbarsub1 img {
+    height: 40px; /* Adjust height as needed */
+    margin-right: 10px; /* Add spacing between logo and website name */
+}
+
+.navbarsub2 {
+    display: flex;
+    align-items: center;
+}
+
+.navbarsub2 a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbarsub2 a:hover {
+    background-color: #ffe588;
+    color: #fff;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 40px; /* Move the search form 40px to the left */
+}
+
+.search-form input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.search-form button {
+    margin-left: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.search-form button:hover {
+    background-color: #555;
+}
+
+.get-started {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 40px; /* Move the "My Profile" button 40px to the left */
+    margin-bottom: 20px;
+}
+
+.get-started:hover {
+    background-color: #555;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #ffe588;
+    color: #fff;
+}
+
+.switch-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.switch-buttons a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #333;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.switch-buttons a:hover,
+.switch-buttons a.active {
+    background-color: #ffe588;
+    color: #fff;
+}

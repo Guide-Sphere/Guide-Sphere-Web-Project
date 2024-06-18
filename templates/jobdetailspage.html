@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Job Details | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='coursedetails_styles.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+    
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function toggleShowMore() {
+                var moreContent = document.getElementById("courseAboutContent");
+                var btnText = document.getElementById("showMoreBtn");
+                var overlay = document.querySelector(".overlay-gradient");
+
+                if (moreContent.classList.contains("show-more")) {
+                    moreContent.classList.remove("show-more");
+                    moreContent.classList.add("fade-out");
+                    btnText.textContent = "Show More";
+                    overlay.classList.remove("overlay-gradient-none"); // Remove overlay-gradient-none class
+                } else {
+                    moreContent.classList.add("show-more");
+                    moreContent.classList.remove("fade-out");
+                    btnText.textContent = "Show Less";
+                    overlay.classList.add("overlay-gradient-none"); // Add overlay-gradient-none class
+                }
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" class="active" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <input type="hidden" name="pageid" value="3">
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+
+        <!-- Displaying the Details of a Job-->
+        <div class="course-details">
+            <h1 style="margin-top: 16%;">Job Details</h1>
+            {% if job.get('job_logo') %}
+                <img src="{{ job['job_logo'] }}" alt="{{ job['job_role'] }}">
+            {% else %}
+                <img src="/static/images/company_image1.png" alt="Default Company image is displayed here">
+            {% endif %}   
+            <h2>{{ job['job_role'] }}</h2>
+            <p><b>Company:</b> {{ job['job_company'] }}</p>
+            <p><b>Expected Salary:</b> {{ job['job_salary'] }}</p>
+            <p><b>Location:</b> {{ job['job_location'] }}</p>
+            <p><b>Experience:</b> {{ job['job_experience'] }}</p>
+            <!-- Use safe filter to render HTML content -->
+            <div class="course-about" style="overflow-wrap: break-word;">
+                <h2>About Job</h2>
+                <div id="courseAboutContent" class="course-content">
+                    {% if job['job_desc_pref1'] != '' %}
+                        {{ job['job_desc_pref1'] | safe }}
+                    {% elif job['job_desc_pref2'] != '' %}
+                        {{ job['job_desc_pref2'] | safe }}
+                    {% elif job['job_desc_pref3'] != '' %}          
+                        <P>Not added. Kindly visit official website for more information</P>
+                    {% endif %}  
+                    <div class="overlay-gradient"></div> <!-- Gradient overlay -->
+                </div>
+                <button id="showMoreBtn" onclick="toggleShowMore()">Show More</button>
+            </div>
+            <!-- access button -->
+            <div class="access-button-container">
+                <a href="{{ job['job_url'] }}" target="_blank" style="color: black; text-decoration: none;">
+                    <button>Access Job</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Related Courses Section -->
+        <h2 style="padding-left: 5%;">Related Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in related_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Related Books Section -->
+        <h2 style="padding-left: 5%; margin-top: 3%;">Realted Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in related_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Similar Websites Section -->
+        <h2 style="padding-left: 5%; margin-top: 3%;">Similar Websites</h2>
+        <div class="items-container similar-websites">
+            <div class="items-list">
+                {% for item in similar_websites_list %}
+                        <div class="item">
+                            <a href="{{ item['web_url'] }}" target="_blank">
+                                <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                            </a>
+                            <h3>{{ item['web_title'] }}</h3>
+                            <p>Platform: {{ item['web_platform'] }}</p>
+                        </div> 
+                    {% endfor %}
+            </div>
+        </div>  
+    </body>
+</html>
+

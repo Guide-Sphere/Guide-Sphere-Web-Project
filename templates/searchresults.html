@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jobstyles.css') }}">
+    <script>
+        function navigateTohomepage() {
+            // Redirect to homepage route
+            window.location.href = "/main";
+        }
+
+        function navigateTocoursesearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('coursesearchpage') }}";
+        }
+
+        function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+        }
+
+        function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageid = "{{ pageid }}"; // Assuming pageid is a string
+
+            // Get the anchors for Courses, Books, and Jobs
+            const coursesAnchor = document.querySelector('.switch-buttons a:nth-child(1)');
+            const booksAnchor = document.querySelector('.switch-buttons a:nth-child(2)');
+            const jobsAnchor = document.querySelector('.switch-buttons a:nth-child(3)');
+
+            // Check the value of pageid and set the corresponding anchor to active
+            if (pageid === "1") {
+                coursesAnchor.classList.add('active');
+            } else if (pageid === "2") {
+                booksAnchor.classList.add('active');
+            } else if (pageid === "3") {
+                jobsAnchor.classList.add('active');
+            }
+        });
+
+        function navigateTomyprofilepage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+        }
+    </script>
+    <style>
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    
+        .search {
+            width: calc(15% - 20px); /* Each search result occupies 25% of the width with 20px margin */
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 50px;
+        }
+    
+        .search img {
+            width: 100%;
+            height: auto;
+        }
+    
+        @media screen and (max-width: 768px) {
+            .search {
+                width: calc(50% - 20px); /* Each search result occupies 50% of the width with 20px margin on smaller screens */
+            }
+        }
+    </style>
+</head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <input type="hidden" name="pageid" value="{{ pageid }}">
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+
+        {% if pageid == '1' %}
+            <!-- Search Results for courses -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                    <div class="search">
+                        <a href="{{ url_for('coursedetailspage', title=search['course_title']) }}">
+                            <img src="{{ search['course_img'] }}" alt="{{ search['course_title'] }}">
+                        </a>
+                        <p>{{ search['course_title'] }}</p>
+                        <p>Duration: {{ search['course_duration'] }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Courses related to "{{ keyword }}" are found.</h3>
+                {% endif %}
+            </div>
+        {% elif pageid == '2' %}
+            <!-- Search Results for books -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                    <div class="search">
+                        <a href="{{ url_for('bookdetailspage', title=search['book_title']) }}">
+                            <img src="{{ search['book_img'] }}" alt="{{ search['book_title'] }}">
+                        </a>
+                        <p>{{ search['book_title'] }}</p>
+                        <p>Author: {{ search['book_author'] }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Books related to "{{ keyword }}" are found.</h3>
+                {% endif %}
+            </div>
+        {% elif pageid == '3' %}
+            <!-- Search Results for jobs -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                        <div class="search">
+                            <a href="{{ url_for('jobdetailspage', title=search['job_role']) }}" style="color: black; text-decoration: none;" >
+                                {% if search.get('job_logo') %}
+                                    <img src="{{ search['job_logo'] }}" alt="{{ search['job_role'] }}">
+                                {% else %}
+                                    <img src="/static/images/company_image1.png" alt="Default Company image is displayed here">
+                                {% endif %}
+                            </a>
+                            <h3>{{ search['job_role'] }}</h3>
+                            <p>Company: {{ search['job_company'] }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Jobs related to "{{ keyword }}" are found.</h3>
+                {% endif %}  
+            </div>
+        {% endif %}
+
+        <!-- <h1>Page id is {{ pageid }}</h1> -->
+    </body>
+</html>

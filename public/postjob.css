@@ -1,0 +1,156 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+
+header {
+    background-color:  #ffc107;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Styles */
+header {
+    width: 100%;
+    background-color: #ffc107;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+   
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    animation: fadeIn 1.5s ease;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+.website-name {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color:black;
+    color:white;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    border: 2px solid black;
+    font-weight: bolder;
+}
+
+.back-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Container Styles */
+.container {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-left: 450px;
+    padding-right: 470px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    width: 100%;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    label, input[type="text"], textarea, input[type="submit"] {
+        font-size: 14px;
+    }
+}

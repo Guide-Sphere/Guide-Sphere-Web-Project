@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+    
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to myprofilepage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+            function navigateToLoginPage() {
+                // Redirect to homepage route
+                window.location.href = "http://localhost:3000/login";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('homepagesearchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+                <button class="get-started" onclick="navigateToLoginPage()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Latest Courses Section -->
+        <h2 style="padding-left: 5%; margin-top: 7%;">Newly Added</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in recent_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Recommended Courses Section -->
+        <h2 style="padding-left: 5%;">Suggested For You</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in personalized_course_recommendations_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Trending Books Section -->
+        <h2 style="padding-left: 5%;">Trending books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in trending_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Recent Job Postings Section -->
+        <h2 style="padding-left: 5%;">Recent Job Postings</h2>
+        <div class="rec-job-postings-container">
+            <div class="rec-job-postings">
+                {% for item in recent_job_postings_list %}
+                    <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                        <div class="rec-job-posts">
+                        <!-- <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}"> -->
+                            <h3>{{ item['job_role'] }}</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h6>{{ item['job_company'] }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h6>{{ item['job_salary'] }}</h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h6>View Details</h6>
+                        </div> 
+                    </a>
+                {% endfor %}
+            </div>
+        </div>             
+    </body>
+</html>

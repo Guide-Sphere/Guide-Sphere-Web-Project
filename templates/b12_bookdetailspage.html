@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='12_bookdetails_styles.css') }}">
+    <script>
+        function navigateTob12_homepage() {
+            // Redirect to homepage route
+            window.location.href = "/before12th";
+        }
+
+        function navigateTob12_ytsearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_ytsearchpage') }}";
+        }
+
+        function navigateTob12_booksearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_booksearchpage') }}";
+        }
+
+        function navigateTob12_websearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_websearchpage') }}";
+        }
+        
+        function navigateTob12_myprofilepage() {
+            // Redirect to homepage route
+            window.location.href = "{{ url_for('b12_myprofilepage', section='default') }}";
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h1 style="margin-top: 2%;">GuideSphere</h1>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTob12_homepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" onclick="navigateTob12_ytsearchpage()">Youtube</a>
+                <a href="#" class="active" onclick="navigateTob12_booksearchpage()">Books</a>
+                <a href="#" onclick="navigateTob12_websearchpage()">Websites</a>
+            </div>
+            <form action="{{ url_for('b12_searchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <input type="hidden" name="pageid" value="2">
+                <button type="submit">Search</button>
+            </form>
+            <button class="get-started" onclick="navigateTob12_myprofilepage()">My Profile</button>
+        </div>
+    </div>
+    
+    <!-- Displaying the Details of a Book-->
+    <div class="book-details">
+        <img class="book-image" src="{{ book['book_img'] }}" alt="{{ book['book_title'] }}">
+        <div class="details-content">
+            <h2>{{ book['book_title'] }}</h2>
+            <p><b>Author:</b> {{ book['book_author'] }}</p>
+            <p><b>Store:</b> {{ book['book_store'] }}</p>
+            <p><b>Price:</b> {{ book['book_price'] }}</p>
+            <div class="access-button-container">
+                <a href="{{ book['book_url'] }}" target="_blank" style="color: black; text-decoration: none;">
+                    <button>Access Book</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Books Section -->
+    <h2 style="padding-left: 5%;">Similar Books</h2>
+    <div class="items-container similar-books">
+        <div class="items-list">
+            {% for item in similar_books_list %}
+                {% if not loop.first %}
+                    <div class="item">
+                        <a href="{{ url_for('b12_bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <div class="item-content">
+                            <h3>{{ item['book_title'] }}</h3>
+                            <p>Author: {{ item['book_author'] }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Related Websites Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Related Websites</h2>
+    <div class="items-container similar-websites">
+        <div class="items-list">
+            {% for item in similar_websites_list %}
+                <div class="item"> 
+                    <a href="{{ item['web_url'] }}" target="_blank">
+                        <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                    </a>
+                    <div class="item-content">
+                        <h3>{{ item['web_title'] }}</h3>
+                        <p>Platform: {{ item['web_platform'] }}</p>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/login_styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Image Resources/gslogo.png" alt="Guidesphere Logo">
+            <h1 class="website-name">Guidesphere</h1>
+        </div>
+        <a href="/option_page" class="back-button">Back</a>
+    </header>
+    <div class="container">
+        <div class="login-container">
+            <h1>Login</h1>
+            <form action="/login" method="post">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+                <p>Don't have an account?<a href="/signup">Create here</a></p>
+            </form>
+        </div>
+        <div class="right-side">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('Image Resources/—Pngtree—simple jobs business web page_935522.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    background-color:  #ffc107;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    animation: fadeIn 1.5s ease;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+.website-name {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    margin: 0 10px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    background-color: white;
+    color: #333;
+}
+
+/* Jobs Section Styles */
+.jobs {
+    flex: 1;
+    padding: 40px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.jobs h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.job {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.job:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.job h3 {
+    font-size: 24px;
+    margin: 0 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+    text-transform: uppercase;
+}
+
+.job p {
+    margin: 5px 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.salary {
+    color: #FF5733; /* Attractive color for salary */
+    font-weight: bold;
+}
+
+.details-button {
+    display: inline-block;
+    background-color: #fff588;
+    color: black;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.details-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.no-jobs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Adjust height as needed */
+    font-size: 24px;
+    color: #999;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Ensure footer stays at the bottom */
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #ff5733;
+}
+
+/* Delete Button Styles */
+.delete-button {
+    display: inline-block;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}

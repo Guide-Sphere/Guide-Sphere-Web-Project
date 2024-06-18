@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job</title>
+    <link rel="stylesheet" href="/postjob.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="Image Resources/gslogo.png" alt="Guidesphere Logo">
+                <p class="website-name">Guidesphere</p>
+            </div>
+            <a href="javascript:history.back()" class="back-button">Back</a>
+        </div>
+    </header>
+
+    <!-- Form Container -->
+    <div class="container">
+        <h1>Post a Job</h1>
+        <form action="/postjob" method="POST" class="form">
+            <label for="job_role">Job Role*</label>
+            <input type="text" id="id_job_role" name="job_role" required><br>
+
+            <label for="job_experience">Job Experience (e.g., 0-1yrs)*</label>
+            <input type="text" id="id_job_experience" name="job_experience" required><br>
+
+            <label for="job_salary">Salary (in rupees or "ND")</label>
+            <input type="text" id="id_job_salary" name="job_salary"><br>
+
+            <label for="job_location">Location of work</label>
+            <input type="text" id="id_job_location" name="job_location"><br>
+
+            <label for="job_skills">Skills Expected</label>
+            <input type="text" id="id_job_skills" name="job_skills"><br>
+
+            <label for="job_desc">Job Description</label><br>
+            <textarea id="id_job_desc" name="job_desc" rows="4" cols="50"></textarea><br>
+
+            <label for="job_url">Google Form Link for Applicant Details*</label>
+            <input type="text" id="id_job_url" name="job_url" required><br>
+
+            <input type="submit" value="Submit" class="submit-button">
+        </form>
+    </div>
+</body>
+</html>

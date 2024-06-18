@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jobstyles.css') }}">
+    <script>
+        function navigateTob12_homepage() {
+            // Redirect to homepage route
+            window.location.href = "/before12th";
+        }
+
+        function navigateTob12_ytsearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_ytsearchpage') }}";
+        }
+
+        function navigateTob12_booksearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_booksearchpage') }}";
+        }
+
+        function navigateTob12_websearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_websearchpage') }}";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageid = "{{ pageid }}"; // Assuming pageid is a string
+
+            // Get the anchors for Courses, Books, and Jobs
+            const coursesAnchor = document.querySelector('.switch-buttons a:nth-child(1)');
+            const booksAnchor = document.querySelector('.switch-buttons a:nth-child(2)');
+            const jobsAnchor = document.querySelector('.switch-buttons a:nth-child(3)');
+
+            // Check the value of pageid and set the corresponding anchor to active
+            if (pageid === "1") {
+                coursesAnchor.classList.add('active');
+            } else if (pageid === "2") {
+                booksAnchor.classList.add('active');
+            } else if (pageid === "3") {
+                jobsAnchor.classList.add('active');
+            }
+        });
+
+        function navigateTob12_myprofilepage() {
+            // Redirect to homepage route
+            window.location.href = "{{ url_for('b12_myprofilepage', section='default') }}";
+        }
+    </script>
+    <style>
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    
+        .search {
+            width: calc(15% - 20px); /* Each search result occupies 25% of the width with 20px margin */
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 50px;
+        }
+    
+        .search img {
+            width: 100%;
+            height: auto;
+        }
+    
+        @media screen and (max-width: 768px) {
+            .search {
+                width: calc(50% - 20px); /* Each search result occupies 50% of the width with 20px margin on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h1 style="margin-top: 2%;">GuideSphere</h1>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTob12_homepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" onclick="navigateTob12_ytsearchpage()">Youtube</a>
+                <a href="#" onclick="navigateTob12_booksearchpage()">Books</a>
+                <a href="#" onclick="navigateTob12_websearchpage()">Websites</a>
+            </div>
+            <form action="{{ url_for('b12_searchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <input type="hidden" name="pageid" value="{{ pageid }}">
+                <button type="submit">Search</button>
+            </form>
+            <button class="get-started" onclick="navigateTob12_myprofilepage()">My Profile</button>
+        </div>
+    </div>
+
+    {% if pageid == '1' %}
+            <!-- Search Results for Youtube -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                        <div class="search">
+                            <a href="{{ url_for('b12_ytdetailspage', title=search['yt_title']) }}">
+                                <img src="{{ search['yt_img'] }}" alt="{{ search['yt_title'] }}">
+                            </a>
+                            <h3>{{ search['yt_title'] }}</h3>
+                            <p>Duration: {{ search['yt_duration'] }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Playlists related to "{{ keyword }}" are found.</h3>
+                {% endif %}
+            </div>
+        {% elif pageid == '2' %}
+            <!-- Search Results for books -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                    <div class="search">
+                        <img src="{{ search['book_img'] }}" alt="{{ search['book_title'] }}">
+                        <p>{{ search['book_title'] }}</p>
+                        <p>Author: {{ search['book_author'] }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Books related to "{{ keyword }}" are found.</h3>
+                {% endif %}
+            </div>
+        {% elif pageid == '3' %}
+            <!-- Search Results for Websites -->
+            <h2 style="margin-top: 7%; font-size: 50px;">Search Results for <strong>"{{ keyword }}"</strong></h2>
+            <div class="search-container">
+                {% if results_list %}
+                    {% for search in results_list %}
+                        <div class="search">
+                            <a href="{{ search['web_url'] }}" target="_blank">
+                                <img src="{{ search['web_img'] }}" alt="{{ search['web_title'] }}">
+                            </a>
+                            <h3>{{ search['web_title'] }}</h3>
+                            <p>Platform: {{ search['web_platform'] }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No Websites related to "{{ keyword }}" are found.</h3>
+                {% endif %}  
+            </div>
+        {% endif %}
+
+        <h1>Page id is {{ pageid }}</h1>
+    
+</body>
+</html>

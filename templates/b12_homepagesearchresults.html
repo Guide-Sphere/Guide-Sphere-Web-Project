@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Search | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+    <script>
+        function navigateTob12_homepage() {
+            // Redirect to homepage route
+            window.location.href = "/before12th";
+        }
+
+        function navigateTob12_ytsearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_ytsearchpage') }}";
+        }
+
+        function navigateTob12_booksearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_booksearchpage') }}";
+        }
+
+        function navigateTob12_websearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_websearchpage') }}";
+        }
+
+        function navigateTob12_myprofilepage() {
+            // Redirect to homepage route
+            window.location.href = "{{ url_for('b12_myprofilepage', section='default') }}";
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h1 style="margin-top: 2%;">GuideSphere</h1>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTob12_homepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" onclick="navigateTob12_ytsearchpage()">Youtube</a>
+                <a href="#" onclick="navigateTob12_booksearchpage()">Books</a>
+                <a href="#" onclick="navigateTob12_websearchpage()">Websites</a>
+            </div>
+            <form action="{{ url_for('b12_homepagesearchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <button type="submit">Search</button>
+            </form>    
+            <button class="get-started" onclick="navigateTob12_myprofilepage()">My Profile</button>
+        </div>
+    </div>
+    
+    <!-- Search results related to Youtube playlists -->
+    <h2 style="padding-left: 5%; margin-top: 7%;">Youtube playlists Found Related to <strong>"{{ keyword }}"</strong></h2>
+    <div class="items-container">
+        <div class="items-list">
+            {% if home_result_yts_list %}
+                {% for item in home_result_yts_list %}
+                    <div class="item">
+                        <a href="{{ url_for('b12_ytdetailspage', title=item['yt_title']) }}">
+                            <img src="{{ item['yt_img'] }}" alt="{{ item['yt_title'] }}">
+                        </a>
+                        <h3>{{ item['yt_title'] }}</h3>
+                        <p>Duration: {{ item['yt_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            {% else %}
+                <h3>No Playlists related to "{{ keyword }}" are found.</h3>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Search results related to books -->
+    <h2 style="padding-left: 5%;">Books Found Related to <strong>"{{ keyword }}"</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% if home_result_books_list %}
+                    {% for item in home_result_books_list %}
+                        <div class="item">
+                            <a href="{{ url_for('b12_bookdetailspage', title=item['book_title']) }}">
+                                <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                            </a>
+                            <h3>{{ item['book_title'] }}</h3>
+                            <p>Author: {{ item['book_author'] }}</p>
+                        </div> 
+                    {% endfor %}
+                {% else %}
+                    <h3>No Books related to "{{ keyword }}" are found.</h3>
+                {% endif %}
+            </div>
+        </div>
+
+    <!-- Search results related to Websites -->
+    <h2 style="padding-left: 5%;">Websites Found Related to <strong>"{{ keyword }}"</h2>
+    <div class="items-container">
+        <div class="items-list">
+            {% if home_result_webs_list %}
+                {% for item in home_result_webs_list %}
+                    <div class="item">
+                        <a href="{{ item['web_url'] }}">
+                            <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                        </a>
+                        <h3>{{ item['web_title'] }}</h3>
+                        <p>Platform: {{ item['web_platform'] }}</p>
+                    </div> 
+                {% endfor %}
+            {% else %}
+                <h3>No Websites related to "{{ keyword }}" are found.</h3>
+            {% endif %}
+        </div>
+    </div>  
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="recruiter_profile.css">
+    <title>Your Profile</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="Image Resources/gslogo.png" alt="Logo">
+                <h1 class="website-name">Guidesphere</h1>
+            </div>
+            <div class="menu">
+                <a href="javascript:history.back()" class="back-button">Back</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h1>My Profile</h1>
+        {{#if recruiter}}
+            <div class="profile-details">
+                <table class="recruiter-profile">
+                    <tr>
+                        <th>Detail</th>
+                        <th>Information</th>
+                    </tr>
+                    <tr>
+                        <td>Work Email</td>
+                        <td>{{recruiter.workemail}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact Number</td>
+                        <td>{{recruiter.contactno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Company Name</td>
+                        <td>{{recruiter.companyname}}</td>
+                    </tr>
+                    <tr>
+                        <td>Company Location</td>
+                        <td>{{recruiter.companylocation}}</td>
+                    </tr>
+                    <tr>
+                        <td>Company Size</td>
+                        <td>{{recruiter.companysize}}</td>
+                    </tr>
+                </table>
+                <a class="edit-button" href="/edit_profile/{{recruiter._id}}">Edit Profile</a>
+            </div>
+        {{else}}
+            <p>No profile details available.</p>
+        {{/if}}
+    </div>
+    <footer>
+        <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Details | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='12_yt_details.css') }}">
+    <script>
+        function navigateTob12_homepage() {
+            // Redirect to homepage route
+            window.location.href = "/before12th";
+        }
+
+        function navigateTob12_ytsearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_ytsearchpage') }}";
+        }
+
+        function navigateTob12_booksearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_booksearchpage') }}";
+        }
+
+        function navigateTob12_websearchpage() {
+            // Redirect to coursesearchpage route
+            window.location.href = "{{ url_for('b12_websearchpage') }}";
+        }
+
+        function navigateTob12_myprofilepage() {
+            // Redirect to homepage route
+            window.location.href = "{{ url_for('b12_myprofilepage', section='default') }}";
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h1 style="margin-top: 2%;">GuideSphere</h1>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTob12_homepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" class="active" onclick="navigateTob12_ytsearchpage()">Youtube</a>
+                <a href="#" onclick="navigateTob12_booksearchpage()">Books</a>
+                <a href="#" onclick="navigateTob12_websearchpage()">Websites</a>
+            </div>
+            <form action="{{ url_for('b12_searchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <input type="hidden" name="pageid" value="1">
+                <button type="submit">Search</button>
+            </form>
+            <button class="get-started" onclick="navigateTob12_myprofilepage()">My Profile</button>
+        </div>
+    </div>
+
+    <!-- Displaying the Details of a Youtube Playlist/video-->
+    <div class="course-details">
+        <h1 style="margin-top: 16%;">Youtube Playlist/Video Details</h1>
+        <img class="course-image" src="{{ youtube['yt_img'] }}" alt="{{ youtube['yt_title'] }}">
+        <h2>{{ youtube['yt_title'] }}</h2>
+        <p>{{ youtube['yt_short_desc'] }}</p>
+        <p><b>By:</b> {{ youtube['yt_instructor'] }}</p>
+        <p><b>Duration:</b> {{ youtube['yt_duration'] }}</p>
+        <p><b>Language:</b> {{ youtube['yt_language'] }}</p>
+        <p><b>Period:</b> {{ youtube['yt_date'] }}</p>
+        <p><b>Class:</b> {{ youtube['yt_class'] }}</p>
+        <p><b>About:</b> {{ youtube['yt_about'] }}</p>
+        <!-- access button -->
+        <div class="access-button-container">
+            <a href="{{ youtube['yt_url'] }}" target="_blank" style="color: black; text-decoration: none;">
+                <button>Access Playlist/Video</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Similar Youtube Playlists Section -->
+    <h2 style="padding-left: 5%;">Similar Playlists / 1 shot vidoes</h2>
+    <div class="items-container">
+        <div class="items-list">
+            {% for item in similar_yts_list %}
+                {% if not loop.first %}  <!-- Skip the first item -->
+                    <div class="item">
+                        <a href="{{ url_for('b12_ytdetailspage', title=item['yt_title']) }}">
+                            <img src="{{ item['yt_img'] }}" alt="{{ item['yt_title'] }}">
+                        </a>
+                        <h3>{{ item['yt_title'] }}</h3>
+                        <p>Duration: {{ item['yt_duration'] }}</p>    
+                    </div> 
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Related Books Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Related Books</h2>
+    <div class="items-container similar-books">
+        <div class="items-list">
+            {% for item in similar_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('b12_bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>
+                    </div> 
+                {% endfor %}
+        </div>
+    </div>
+
+    <!-- Related Websites Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Related Websites</h2>
+    <div class="items-container similar-websites">
+        <div class="items-list">
+            {% for item in similar_websites_list %}
+                    <div class="item">
+                        <a href="{{ item['web_url'] }}" target="_blank">
+                            <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                        </a>
+                        <h3>{{ item['web_title'] }}</h3>
+                        <p>Platform: {{ item['web_platform'] }}</p>
+                    </div> 
+                {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>

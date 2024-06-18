@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job Details</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 1000px;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        .form {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            color: white;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 98%;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            color: black;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #fff588;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit a Job</h1>
+       <form action="/view_job/{{job._id}}" method="POST" class="form" id="jobForm">
+    <label for="job_role">Job Role*</label>
+    <input type="text" id="id_job_role" value ="{{job.job_role}}"name="job_role" required><br>
+
+    <label for="job_company">Job Company*</label>
+    <input type="text" id="id_job_company"value ="{{job.job_company}}" name="job_company" required><br>
+
+    <label for="job_experience">Job Experience (e.g., 0-1yrs)*</label>
+    <input type="text" id="id_job_experience" value ="{{job.job_experience}}" name="job_experience" required><br>
+
+    <label for="job_salary">Salary (in rupees or "ND")</label>
+    <input type="text" id="id_job_salary" value ="{{job.job_salary}}" name="job_salary"><br>
+
+    <label for="job_location">Location of work</label>
+    <input type="text" id="id_job_location" value ="{{job.job_location}}" name="job_location"><br>
+
+    <label for="job_skills">Skills Expected</label>
+    <input type="text" id="id_job_skills"  value ="{{job.job_skills}}" name="job_skills"><br>
+
+    <label for="job_desc">Job Description</label><br>
+    <textarea id="id_job_desc" name="job_desc_pref1"  rows="4" cols="50">{{job.job_desc_pref1}}</textarea><br>
+
+    <label for="job_url">Google Form Link for Applicant Details*</label>
+    <input type="text" id="id_job_url"value ="{{job.job_url}}" name="job_url" required><br>
+
+    <input type="submit" value="Submit" class="submit-button">
+</form>
+
+    </div>
+
+</body>
+</html>

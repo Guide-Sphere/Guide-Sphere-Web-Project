@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Details | GuideSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bookdetails_styles.css') }}">
+    <script>
+        function navigateTohomepage() {
+            window.location.href = "/main";
+        }
+
+        function navigateTocoursesearchpage() {
+            window.location.href = "{{ url_for('coursesearchpage') }}";
+        }
+
+        function navigateTobooksearchpage() {
+            window.location.href = "{{ url_for('booksearchpage') }}";
+        }
+
+        function navigateTojobsearchpage() {
+            window.location.href = "{{ url_for('jobsearchpage') }}";
+        }
+
+        function toggleShowMore() {
+            var moreContent = document.getElementById("courseAboutContent");
+            var btnText = document.getElementById("showMoreBtn");
+            var overlay = document.querySelector(".overlay-gradient");
+
+            if (moreContent.classList.contains("show-more")) {
+                moreContent.classList.remove("show-more");
+                moreContent.classList.add("fade-out");
+                btnText.textContent = "Show More";
+                overlay.classList.remove("overlay-gradient-none");
+            } else {
+                moreContent.classList.add("show-more");
+                moreContent.classList.remove("fade-out");
+                btnText.textContent = "Show Less";
+                overlay.classList.add("overlay-gradient-none");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h3>GuideSphere</h3>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                <a href="#" class="active" onclick="navigateTobooksearchpage()">Books</a>
+                <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+            </div>
+            <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <input type="hidden" name="pageid" value="2">
+                <button type="submit">Search</button>
+            </form>
+            <button class="get-started">My Profile</button>
+        </div>
+    </div>
+
+    <!-- Displaying the Details of a Book-->
+    <div class="book-details">
+        <div class="image-container">
+            <img src="{{ book['book_img'] }}" alt="{{ book['book_title'] }}" class="book-image">
+        </div>
+        <div class="details-content">
+            <h2>{{ book['book_title'] }}</h2>
+            <p><b>Author:</b> {{ book['book_author'] }}</p>
+            <!-- Use safe filter to render HTML content -->
+            <div class="book-about" style="overflow-wrap: break-word;">
+                <h2>About Book</h2>
+                <div id="courseAboutContent" class="book-content">
+                    {{ book['book_desc_html'] | safe }}
+                </div>
+            </div>
+            <!-- access button -->
+            <div class="access-button-container">
+                <a href="{{ book['book_url'] }}" target="_blank" style="color: black; text-decoration: none;">
+                    <button>Access Book</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2 style="padding-left: 5%; margin-top: 3%;">Similar Books</h2>
+    <div class="items-container similar-books">
+        <div class="items-list">
+            {% for item in similar_books_list %}
+                {% if not loop.first %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <div class="item-content">
+                            <h3>{{ item['book_title'] }}</h3>
+                            <p>Author: {{ item['book_author'] }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Similar Websites Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Similar Websites</h2>
+    <div class="items-container similar-websites">
+        <div class="items-list">
+            {% for item in similar_websites_list %}
+            <div class="item">
+                <a href="{{ item['web_url'] }}" target="_blank">
+                    <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                </a>
+                <h3>{{ item['web_title'] }}</h3>
+                <p>Platform: {{ item['web_platform'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html> 

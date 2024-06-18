@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-button {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: whitesmoke;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Profile</h1>
+        <form action="/edit_profile/{{recruiter._id}}" method="POST" class="form">
+            <label for="workemail">Work Email*</label>
+            <input type="email" id="id_workemail" name="workemail" value="{{recruiter.workemail}}" required>
+
+            <label for="contactno">Contact Number*</label>
+            <input type="number" id="id_contactno" name="contactno" value="{{recruiter.contactno}}" required>
+
+            <label for="companyname">Company Name*</label>
+            <input type="text" id="id_companyname" name="companyname" value="{{recruiter.companyname}}" required>
+
+            <label for="companylocation">Company Location*</label>
+            <input type="text" id="id_companylocation" name="companylocation" value="{{recruiter.companylocation}}" required>
+
+            <label for="companysize">Company Size*</label>
+            <input type="number" id="id_companysize" name="companysize" value="{{recruiter.companysize}}" required>
+
+            <input type="submit" value="Submit" class="submit-button">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    background-image: url('images/9161244.png');
+    background-size: cover;
+    background-position: center;
+}
+
+h1, h2, h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    margin-top: 100px; /* Adjusted to avoid overlap with the navbar */
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Similar Books */
+.similar-books .item {
+    width: calc(20% - 20px); /* Adjust width to fit 5 items per row */
+    margin: 30px; /* Add margin for spacing between items */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+.similar-books .item img {
+    width: 100%;
+    height: 350px; /* Fixed height to ensure equal image sizes */
+    border-top-left-radius: 10px; /* Ensure rounded corners for the image */
+    border-top-right-radius: 10px; /* Ensure rounded corners for the image */
+}
+
+.similar-books .item-content {
+    padding: 5px; /* Adjust padding for content */
+}
+
+.similar-books .item h3 {
+    margin: 0;
+    font-size: 1em; /* Reduce font size */
+}
+
+.similar-books .item p {
+    margin: 5px 0;
+    font-size: 0.8em; /* Reduce font size */
+}
+
+/* Similar Websites */
+.similar-websites .item {
+    width: calc(20% - 0px); /* Adjust width to fit 5 items per row */
+    margin: 10px; /* Add margin for spacing between items */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+.similar-websites .item img {
+    width: 100%;
+    height: 250px; 
+    border-top-left-radius: 10px; /* Ensure rounded corners for the image */
+    border-top-right-radius: 10px; /* Ensure rounded corners for the image */
+}
+
+.similar-websites .item-content {
+    padding: 15px; /* Adjust padding for content */
+}
+
+.similar-websites .item h3 {
+    margin: 0;
+    font-size: 1em; /* Reduce font size */
+}
+
+.similar-websites .item p {
+    margin: 5px 0;
+    font-size: 0.8em; /* Reduce font size */
+}
+
+/* Add this to adjust the layout */
+.book-details {
+    
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 150px;
+    padding: 80px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start; /* Align items to the start of the flex container */
+}
+
+.image-container {
+    flex: 0 0 auto; /* Fix the width of the image container */
+    margin-right: 250px;
+    margin-top: 30px; /* Add space between image and content */
+}
+
+.book-image {
+    margin-right: 30px;
+    width: 30%;
+    height: 350px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 4px solid white;
+    padding-right: 10px;
+  
+}
+
+.details-content {
+    flex: 1; /* Fill remaining space */
+}
+
+.access-button-container {
+    text-align: left;
+}
+
+.book-content {
+    overflow-wrap: break-word;
+}
+
+.book-outcomes ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.book-outcomes li {
+    margin-bottom: 10px;
+}

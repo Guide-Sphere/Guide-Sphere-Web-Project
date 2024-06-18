@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="signup.css">
+    <style>
+        small.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Image Resources/gslogo.png" alt="Guidesphere Logo">
+            <h1 class="website-name">Guidesphere</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="signup">
+            <div class="login">
+                <h1>GuideSphere</h1>
+                <img src="Image Resources/gslogo.png" alt="logo" width="50px" height="50px">
+                <form action="/signup" method="post" id="signupForm">
+                    <label>Email Address</label><br>
+                    <input type="text" name="email" required><br>
+                    <label>Password</label><br>
+                    <input type="password" name="password" required><br>
+                    <small id="passwordError" class="error"></small><br>
+                    <label>Confirm Password</label><br>
+                    <input type="password" name="confirm password" required><br>
+                    <button type="submit">Sign up</button>
+                    <p>Already have an account?<a href="/login">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const password = document.querySelector('input[name="password"]').value;
+            const passwordError = document.getElementById('passwordError');
+            
+            const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-zA-Z0-9]).{8,}$/;
+            
+            if (!passwordPattern.test(password)) {
+                passwordError.textContent = 'Password must be at least 8 characters long, contain at least one uppercase letter, and one special character.';
+            } else {
+                passwordError.textContent = '';
+                // Proceed with form submission
+                this.submit();
+            }
+        });
+    </script>
+</body>
+</html>

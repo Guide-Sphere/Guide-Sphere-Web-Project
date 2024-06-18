@@ -1,0 +1,230 @@
+/* CSS for the profile section */
+body{
+    background-image: url('/static/images/9161244.png');
+    background-size: cover;
+    background-position: center;
+}
+.profile-section {
+    background-color: #fff;
+    
+    /* Set background color to white */
+    border-radius: 10px;
+    /* Add curved corners */
+    padding: 20px;
+    /* Add padding */
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* Add shadow */
+    border: 2px solid transparent;
+    /* Add transparent border */
+}
+
+.profile-section:hover {
+    border-color: #d1d1d1;
+    /* Add blue border on hover */
+}
+
+.profile-section:hover {
+    background-color: #f0f0f0;
+    /* Light background color on hover */
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
+    cursor: pointer;
+    /* Change cursor to hand */
+}
+
+.profile1-details {
+    cursor: pointer;
+    /* Change cursor to hand */
+    display: flex;
+    /* Use flexbox layout */
+}
+
+.profile1-details-right {
+    flex: 1;
+    /* Allow profile info to take remaining space */
+    border-left: 1px solid #ccc;
+    /* Add border to the left */
+    padding-left: 20px;
+    /* Add padding to separate text from the border */
+}
+
+.profile1-details-right p {
+    text-align: center;
+    color: #989898;
+}
+
+.profile-section {
+    position: relative;
+    /* Make the profile section relatively positioned */
+}
+
+.add-button {
+    position: absolute;
+    top: 5px;
+    /* Adjust top position */
+    right: 5px;
+    /* Adjust right position */
+    background-color: transparent;
+    color: #007bff;
+    /* Blue color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    /* Increase font weight */
+    padding: 8px 12px;
+    /* Increase padding for a thicker appearance */
+    border-radius: 5px;
+    /* Add border radius for rounded corners */
+}
+
+/* CSS for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black background */
+    z-index: 9999;
+    /* Ensure the popup appears on top of other content */
+}
+
+.popup-content {
+    background-color: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup-content h2 {
+    margin-top: 0;
+    margin-left: 1%;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* CSS for User Basic Details Popup */
+.popup-content {
+    background-color: #fff;
+    width: 400px;
+    /* Adjust width as needed */
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup-content h2 {
+    margin-top: 0;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.popup-content input[type="text"] {
+    width: calc(100% - 40px);
+    /* Adjust input width */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-content .button-container {
+    text-align: right;
+    /* Align buttons to the right */
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    /* Add margin between buttons */
+    display: inline-block;
+}
+
+.popup-content button.cancel {
+    background-color: transparent;
+    color: #007bff;
+    /* Change color of cancel button text */
+}
+
+.popup-content button.delete {
+    background-color: #8B0000;
+    /* Dark red color */
+    margin-left: 0;
+    /* Remove margin for delete button */
+}
+
+/* CSS class for styling the select element */
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    /* Adjust font size as needed */
+    background-color: #fff;
+    /* Background color */
+    color: #333;
+    /* Text color */
+    appearance: none;
+    /* Remove default appearance (for modern browsers) */
+}
+
+/* CSS class for styling the select options */
+.custom-select option {
+    background-color: #fff;
+    /* Background color */
+    color: #333;
+    /* Text color */
+
+}
+
+.deletebutton.clicked {
+    background-color: red;
+}
+
+.deletebutton:hover {
+    transition: 0.3s;
+    background-color: rgb(208, 103, 103);
+}

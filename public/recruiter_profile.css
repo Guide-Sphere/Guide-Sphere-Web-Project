@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('Image Resources/top-view-desk-concept-with-gray-background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    background-color: #ffc107;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+.website-name {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: white;
+    color: #333;
+}
+
+/* Container styles */
+.container {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.profile-details {
+    margin-top: 20px;
+}
+
+.recruiter-profile {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recruiter-profile th, .recruiter-profile td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.recruiter-profile th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 110px;
+}
+
+.edit-button:hover {
+    background-color: white;
+    color: #333;
+    border: 1px solid #333;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Ensure footer stays at the bottom */
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #ff5733;
+}

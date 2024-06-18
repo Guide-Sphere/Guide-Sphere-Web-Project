@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+    <head>
+        <title>My Profile | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='myprofile_styles.css') }}">
+    </head>
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+    
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    <body>
+        <script src="{{ url_for('static', filename='js/myprofile_js.js') }}"></script>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h1 style="margin-top: 2%;">GuideSphere</h1>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('homepagesearchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+
+        <!-- Profile section -->
+        <!-- User Basic Details -->
+        <div class="profile-section" style="margin-top: 7%;">
+            <div class="profile1-details">
+                <div class="profile1-details-left" onclick="showUploadPopup()">
+                    {% if user['userPhoto'] %}
+                        <img src="/static/uploads/{{ user['userPhoto'] }}" alt="{{ user['email'] }}" width="200px" height="200px">
+                    {% else %}
+                        <img src="/static/images/addimage.png" alt="Add your image" width="200px" height="200px">
+                    {% endif %}
+                </div>
+                <div class="profile1-details-right" onclick="showBasicDetailsPopup()">
+                    {% if user['fullName'] %}
+                        <h1>{{ user['fullName'] }}</h1>
+                    {% else %}
+                        <h1>Add your name</h1>
+                    {% endif %}
+                    <p>{{ user['email'] }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Education Details  -->
+        <div class="profile-section" >
+            <h3>Education</h3>    
+            <button class="add-button" onclick="showEducationPopup()">Add</button> 
+            <div class="profile-details" onclick="showEducationPopup()">
+                {% if user['education'] %}
+                    <ul>
+                        {% for education_obj in user['education'] %}
+                                <strong>College Name:</strong> {{ education_obj['collegeName'] }} <br>
+                                <strong>Specialization:</strong> {{ education_obj['specialization'] }} <br>
+                                <strong>Grade:</strong> {{ education_obj['grade'] }} <br>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Add your education details</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- User Interests -->
+        <div class="profile-section" >
+            <h3>Interests</h3>
+            <button class="add-button" onclick="showinterestsPopup()">Add</button> 
+            <div class="profile-details"  onclick="showinterestsPopup()">
+                {% if user['interests'] %}
+                <ul>
+                    {% for interest in user['interests'] %}
+                        <li>{{ interest }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <p>Add your interests here</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- More about User -->
+        <div class="profile-section" >
+            <h3>Tell us more about yourself</h3>
+            <div class="profile-details" onclick="showmoreAboutUserPopup()">
+                {% if user['moreAboutUser'] %}
+                    <p>{{ user['moreAboutUser'] }} &nbsp;&nbsp;<img src="/static/images/pencil.png" alt="This is a pencil image" style="width: 20px; height: 20px;"></p>
+                {% else %}       
+                    <p>Tell us more about your self &nbsp;&nbsp;<img src="/static/images/pencil.png" alt="This is a pencil image" style="width: 20px; height: 20px;"></p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Popup Section -->
+        <!-- Popup for Uploadig image -->
+        <div class="popup" id="uploadPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closeUploadPopup()">&times;</span>
+                <h2>Upload a recent photo</h2>
+                <p>Only png, jpg, jpeg, gif formats</p>
+                <form id="userPhotoDetailsForm" action="{{ url_for('myprofilepage', section='userPhotoDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="uploadPhoto(event)">
+                    <input type="file" id="id_userPhoto" name="userPhoto">
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>       
+        
+        <!-- Popup for User Basic Details -->
+        <div class="popup" id="basicDetailsPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closeBasicDetailsPopup(); ">&times;</span>
+                <h2>Basic Details</h2>
+                <form id="basicDetailsForm" action="{{ url_for('myprofilepage', section='basicDetails') }}" method="POST" onsubmit="saveBasicDetails(event)">
+                    <label for="id_fullName">Full name:</label>
+                    <input type="text" id="id_fullName" name="fullName" placeholder="Enter your full name">
+                    <div class="button-container">
+                        <button onclick="closeBasicDetailsPopup(); return false;" class="cancel">Cancel</button>
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pop-up for Education Details -->
+        <div class="popup" id="educationPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closeEducationPopup()">&times;</span>
+                <h2>Education Details</h2>
+                <form id="educationDetailsForm" action="{{ url_for('myprofilepage', section='educationDetails') }}" method="POST" onsubmit="saveEducationDetails(event)">
+                    <label for="collegeName">College full name:</label>
+                    <input type="text" id="id_collegeName" name="collegeName" placeholder="Enter college full name">
+                    <label for="specialization">Specialization:</label>
+                    <input type="text" id="id_specialization" name="specialization" placeholder="Enter specialization">
+                    <label for="grade">Grade:</label>
+                    <input type="text" id="id_grade" name="grade" placeholder="Enter grade/percentage">
+                    <div class="button-container">
+                        <button onclick="closeEducationPopup(); showdeleteducationPopup(); return false;" class="delete">Delete</button>
+                        <button onclick="closeEducationPopup(); return false;" class="cancel">Cancel</button>
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pop up for deleting Education -->
+        <div class="popup" id="deleteducationPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closedeleteducationPopup()">&times;</span>
+                <h2>Education Details</h2>
+                <form id="deleteducationDetailsForm" action="{{ url_for('myprofilepage', section='deleteducationDetails') }}" method="POST" onsubmit="deleteducationDetails(event)">
+                    {% if user['education'] %}
+                    <ul>
+                        {% for education_obj in user['education'] %}
+                        <li>
+                            <input type="checkbox" name="selected_education[]" value="{{ education_obj['collegeName']  }}"> 
+                            <strong>College Name:</strong> {{ education_obj['collegeName'] }} <br>
+                            <strong>Specialization:</strong> {{ education_obj['specialization'] }} <br>
+                            <strong>Grade:</strong> {{ education_obj['grade'] }} <br>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <p>Nothing to delete</p>
+                    {% endif %}
+                    <div class="button-container">
+                        <button type="submit">Delete Selected</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pop up for Interests -->
+        <div class="popup" id="interestsPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closeinterestsPopup()">&times;</span>
+                <h2>Interests/Feilds</h2>
+                <form id="interestsDetailsForm" action="{{ url_for('myprofilepage', section='interestsDetails') }}" method="POST" autocomplete="off" onsubmit="saveinterestsDetails(event)">
+                    <label for="id_interests">Select your interests:</label>
+                    <select id="id_interests" name="interests" class="custom-select">
+                        <option value="">Select your interest</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Artificial Intellingnece">Artificial Intellingnece</option>
+                        <option value="React">React</option>
+                        <option value="Programming">Programming</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Kubernets">Kubernets</option>
+                        <option value="Mobile Application Development">Mobile Application Development</option>
+                        <option value="Node.js">Node.js</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Database Management">Database Management</option>
+                    </select>
+                    <div class="button-container">
+                        <button onclick="closeinterestsPopup(); showdeleteinterestsPopup(); return false;" class="delete">Delete</button>
+                        <button onclick="closeinterestsPopup(); return false;" class="cancel">Cancel</button>
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pop up for deleting Interests -->
+        <div class="popup" id="deleteinterestsPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closedeleteinterestsPopup()">&times;</span>
+                <h2>Interests/Feilds</h2>
+                <form id="deleteinterestsDetailsForm" action="{{ url_for('myprofilepage', section='deleteinterestsDetails') }}" method="POST" onsubmit="deleteinterestsDetails(event)">
+                    {% if user['interests'] %}
+                    <ul>
+                        {% for interest in user['interests'] %}
+                        <li>
+                            <input type="checkbox" name="selected_interests[]" value="{{ interest }}"> {{ interest }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <p>Nothing to delete</p>
+                    {% endif %}
+                    <div class="button-container">
+                        <button type="submit">Delete Selected</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+        <!-- Pop up for tell us more -->
+        <div class="popup" id="moreAboutUserPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closemoreAboutUserPopup();">&times;</span>
+                <h2>Write about your self</h2>
+                <form id="moreAboutUserDetailsForm" action="{{ url_for('myprofilepage', section='moreAboutUserDetails') }}" method="POST" onsubmit="savemoreAboutUserDetails(event)">
+                    <textarea id="id_moreAboutuser" name="moreAboutUser" placeholder="Here..." cols="50" rows="10">{{ user['moreAboutUser'] }}</textarea>                    <div class="button-container">
+                        <button onclick="closemoreAboutUserPopup(); return false;" class="cancel">Cancel</button>
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jobs Search Page | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='jobstyles.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" class="active" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <input type="hidden" name="pageid" value="3">
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+        
+        <!-- Personalized Jobs Recommendations Section -->
+        <h2 style="padding-left: 5%;  margin-top: 7%">Jobs That You Like</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in personalized_job_recommendations_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}
+                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> 
+
+        <!-- Developer Jobs Section -->
+        <h2 style="padding-left: 5%;">Developer Jobs</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in developer_jobs_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}
+                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>  
+
+        <!-- Associate Jobs Section -->
+        <h2 style="padding-left: 5%; ">Associate Jobs</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in associate_jobs_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> 
+
+        <!-- Business Jobs Section -->
+        <h2 style="padding-left: 5%;  ">Business Jobs</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in business_jobs_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> 
+
+        <!-- tester Jobs Section -->
+        <h2 style="padding-left: 5%;  ">Tester Jobs</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in digital_marketing_jobs_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div> 
+                {% endfor %}
+            </div>
+        </div> 
+
+        <!-- manager Jobs Section -->
+        <h2 style="padding-left: 5%;  ">Manager Jobs</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in marketing_executive_jobs_list %}
+                    <div class="item">
+                        <a href="{{ url_for('jobdetailspage', title=item['job_role']) }}" style="color: black; text-decoration: none;" >
+                            {% if item.get('job_logo') %}
+                                <img src="{{ item['job_logo'] }}" alt="{{ item['job_role'] }}">
+                            {% else %}
+                                <img src="static/images/company_image1.png" alt="Default Company image is displayed here">
+                            {% endif %}                        </a>
+                        <h3>{{ item['job_role'] }}</h3>
+                        <p>Company: {{ item['job_company'] }}</p>
+                    </div>  
+                {% endfor %}
+            </div>
+        </div> 
+
+    </body>
+</html>

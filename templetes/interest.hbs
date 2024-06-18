@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>After 12th Student Interest</title>
+    <link rel="stylesheet" href="/interest.css">
+</head>
+<body>
+    <form action="/interest" method="post"> <!-- Changed action to "/interest" and method to "post" -->
+        <div class="interest-container">
+            <h2 class="r1">What Are Your Interests?</h2>
+            <div class="options">
+                <input type="checkbox" id="web-development" name="interests" value="Web Development">
+                <label class="btn" for="web-development">Web Development</label>
+
+                <input type="checkbox" id="data-science" name="interests" value="Data Science">
+                <label class="btn" for="data-science">&nbsp; &nbsp; &nbsp; &nbsp; Data&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  Science</label>
+
+                <input type="checkbox" id="cloud-computing" name="interests" value="Cloud Computing">
+                <label class="btn" for="cloud-computing">Cloud Computing</label>
+
+                <input type="checkbox" id="app-development" name="interests" value="App Development">
+                <label class="btn" for="app-development">App Development</label>
+
+                <input type="checkbox" id="programming" name="interests" value="Programming">
+                <label class="btn" for="programming">Programming</label>
+
+                <input type="checkbox" id="machine-learning" name="interests" value="Machine Learning">
+                <label class="btn" for="machine-learning">Machine Learning</label>
+            </div>
+            <button class="next" type="submit">Next</button>
+        </div>
+    </form>
+</body>
+</html>

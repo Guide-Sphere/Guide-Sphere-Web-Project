@@ -1,0 +1,190 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('Image Resources/joanna-kosinska-1_CMoFsPfso-unsplash.jpg');
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+header {
+    background-color: #ffc107; 
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.website-name {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+.signup-container {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-container h1 {
+    margin-bottom: 20px;
+    text-align: center; 
+}
+
+.signup-container form {
+    text-align: left;
+    width: 100%;
+}
+
+.signup-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.signup-container input[type="email"],
+.signup-container input[type="password"],
+.signup-container input[type="text"] {
+    width: calc(100% - 22px); 
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.signup-container button {
+    width: 100%;
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-container button:hover {
+    background-color: #f39c12;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    animation: fadeIn 1.5s ease;
+    font-weight: bold;
+    margin-left: 1200px;
+}
+
+.back-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.interest-container {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.interest-container h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + .btn {
+    display: inline-block;
+    width: 120px;
+    height: 20px;
+    margin: 15px;
+    margin-top:5px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    background-color: white;
+    border: 4px solid whitesmoke;
+    border-radius:30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+input[type="checkbox"]:checked + .btn {
+    background-color:black;
+    color: white;
+    border: 4px solid black;
+    transform: scale(1.05);
+}
+
+.next {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    color: #333;
+    border-radius: 20px;  /* Adjusted border-radius */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.next:hover {
+    background-color:black;
+    color: white;
+    border: 2px solid black;
+    transform: scale(1.05);
+}
+

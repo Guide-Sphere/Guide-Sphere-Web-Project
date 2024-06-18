@@ -1,0 +1,196 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1.5s ease;
+}
+
+header {
+    background-color: #ffc107;
+    padding: 20px 0;
+    color: black;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+nav img {
+    height: 80px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    animation: fadeIn 1.5s ease;
+    font-weight: bolder;
+}
+
+.logo-container img {
+    height: 40px;
+    animation: fadeIn 1.5s ease;
+}
+
+.logo-container p {
+    margin-left: 10px;
+    font-size: 1.2em;
+    color: black;
+    animation: fadeIn 1.5s ease;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    animation: fadeIn 1.5s ease;
+}
+
+nav ul li {
+    margin-right: 20px;
+    animation: fadeIn 1.5s ease;
+}
+
+nav ul li a {
+    color:black;
+    text-decoration: none;
+    animation: fadeIn 1.5s ease;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    animation: fadeIn 1.5s ease;
+    background-color: rgba(245, 245, 245, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding-top: 40px;
+    padding-left: 20px;
+    border-radius: 10px;
+}
+
+.feature {
+    text-align: center;
+    margin-right: 20px; 
+    animation: fadeIn 1.5s ease;
+}
+
+.feature img {
+    width: 400px;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    animation: fadeIn 1.5s ease;
+}
+
+.feature img:hover {
+    transform: scale(1.05);
+}
+
+.feature h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1em;
+}
+
+main {
+    background-image: url('Image Resources/beatriz-perez-moya-XN4T2PVUUgk-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    color: black;
+    padding: 100px 20px;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(245, 245, 245, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 60px;
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+}
+
+.hero h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.hero button {
+    background-color: #ffc107;
+    color: black;
+    border-color: black;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    font-weight: bolder;
+    border: 3px solid black;
+}
+  
+.hero button:hover {
+    background-color: white;
+    transform: scale(1.05); 
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: whitesmoke;
+    margin-bottom: 20px; 
+    margin-top: 80px;
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+}
+
+.content:hover {
+    transform: scale(1.05); 
+}
+
+footer {
+    background-color: #ffc107;
+    color: black;
+    padding: 40px 20px;
+    padding-left: 570px;
+}
+
+footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li {
+    margin-right: 20px;
+}
+
+footer ul li a {
+    
+    color:black;
+    text-decoration: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

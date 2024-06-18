@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Course Details | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='coursedetails_styles.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+    
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function toggleShowMore() {
+                var moreContent = document.getElementById("courseAboutContent");
+                var btnText = document.getElementById("showMoreBtn");
+                var overlay = document.querySelector(".overlay-gradient");
+
+                if (moreContent.classList.contains("show-more")) {
+                    moreContent.classList.remove("show-more");
+                    moreContent.classList.add("fade-out");
+                    btnText.textContent = "Show More";
+                    overlay.classList.remove("overlay-gradient-none"); // Remove overlay-gradient-none class
+                } else {
+                    moreContent.classList.add("show-more");
+                    moreContent.classList.remove("fade-out");
+                    btnText.textContent = "Show Less";
+                    overlay.classList.add("overlay-gradient-none"); // Add overlay-gradient-none class
+                }
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    </head>
+    <body>
+    <div class="navbar">
+        <div class="navbarsub1">
+            <h3>GuideSphere</h3>
+        </div>
+        <div class="navbarsub2">
+            <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+            <div class="switch-buttons">
+                <a href="#" class="active" onclick="navigateTocoursesearchpage()">Courses</a>
+                <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+            </div>
+            <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                <input name="keyword" placeholder="Search here" required>
+                <input type="hidden" name="pageid" value="1">
+                <button type="submit">Search</button>
+            </form>
+            <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+        </div>
+    </div>
+
+    <!-- Displaying the Details of a Course-->
+    <div class="course-details">
+        <h1 style="margin-top: 16%;">Course Details</h1>
+        <img class="course-image" src="{{ course['course_img'] }}" alt="{{ course['course_title'] }}">
+        <h2>{{ course['course_title'] }}</h2>
+        <p>{{ course['course_short_desc'] }}</p>
+        <p><b>By:</b> {{ course['course_instrutor'] }}</p>
+        <p><b>Duration:</b> {{ course['course_duration'] }}</p>
+        <p><b>Ratings:</b> {{ course['course_rating'] }} out of 5</p>
+        <p><b>Language:</b> {{ course['course_language'] }}</p>
+        <p><b>Last Updated:</b> {{ course['course_date'] }}</p>
+        <p><b>Current Price:</b> {{ course['course_price'] }}</p>
+        <p><b>Original Price:</b> {{ course['course_price_original'] }}</p>
+        <!-- Use safe filter to render HTML content -->
+        <div class="course-about" style="overflow-wrap: break-word;">
+            <h2>Course About</h2>
+            <div id="courseAboutContent" class="course-content">
+                {% if course['course_platform'] == 'udemy' %}
+                    {{ course['course_about_html'] | safe }}    
+                {% elif course['course_platform'] == 'youtube' %}
+                    <p>{{ course['course_about_text'] }}</p>
+                {% endif %} 
+                
+                <div class="overlay-gradient"></div> <!-- Gradient overlay -->
+            </div>
+            <button id="showMoreBtn" onclick="toggleShowMore()">Show More</button>
+        </div>
+        <!-- Use safe filter to render HTML content -->
+        <!-- Course Outcomes -->
+        <div class="course-outcomes" style="overflow-wrap: break-word;">
+            <h2>Course Outcomes</h2>
+            {% if course['course_platform'] == 'udemy' %}
+                <ul style="list-style-type: none; padding-left: 0;">
+                    {% for outcome in course['course_outcome_text'].split('\n') %}
+                        {% if not loop.first and outcome.strip() != "Show more" %}
+                            <li style="margin-bottom: 5px;">&bull; {{ outcome }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% elif course['course_platform'] == 'youtube' %}
+                <p>{{ course['course_outcome_text'] }}</p>
+            {% endif %}
+        </div>
+        <!-- access button -->
+        <div class="access-button-container">
+            <a href="{{ course['course_url'] }}" target="_blank" style="color: black; text-decoration: none;">
+                <button>Access Course</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Similar Courses Section -->
+    <h2 style="padding-left: 5%;">Similar Courses</h2>
+    <div class="items-container">
+        <div class="items-list">
+            {% for item in similar_courses_list %}
+                {% if not loop.first %}  <!-- Skip the first item -->
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Similar Books Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Similar Books</h2>
+    <div class="items-container similar-books">
+        <div class="items-list">
+            {% for item in similar_books_list %}
+                {% if not loop.first %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <div class="item-content">
+                            <h3>{{ item['book_title'] }}</h3>
+                            <p>Author: {{ item['book_author'] }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Similar Websites Section -->
+    <h2 style="padding-left: 5%; margin-top: 3%;">Similar Websites</h2>
+    <div class="items-container similar-websites">
+        <div class="items-list">
+            {% for item in similar_websites_list %}
+                <div class="item">
+                    <a href="{{ item['web_url'] }}" target="_blank">
+                        <img src="{{ item['web_img'] }}" alt="{{ item['web_title'] }}">
+                    </a>
+                    <div class="item-content">
+                        <h3>{{ item['web_title'] }}</h3>
+                        <p>Platform: {{ item['web_platform'] }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+</html>

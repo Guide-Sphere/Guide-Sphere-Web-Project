@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Books Search Page | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobookssearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" class="active" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <input type="hidden" name="pageid" value="2">
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+
+        <!-- Personalized Books Recommendations Section -->
+        <h2 style="padding-left: 5%; margin-top: 7%;">Books of Your Interests</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in personalized_book_recommendations_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Python Books Section -->
+        <h2 style="padding-left: 5%;">Python Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in python_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Data Structure Books Section -->
+        <h2 style="padding-left: 5%;">Data Structure Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in datastructures_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- UX Books Section -->
+        <h2 style="padding-left: 5%;">UX Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in ux_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Software Architecture Books Section -->
+        <h2 style="padding-left: 5%;">Software Architecture Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in software_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Excel Books Section -->
+        <h2 style="padding-left: 5%;">Excel Books</h2>
+        <div class="items-container similar-books">
+            <div class="items-list">
+                {% for item in excel_books_list %}
+                    <div class="item">
+                        <a href="{{ url_for('bookdetailspage', title=item['book_title']) }}">
+                            <img src="{{ item['book_img'] }}" alt="{{ item['book_title'] }}">
+                        </a>
+                        <h3>{{ item['book_title'] }}</h3>
+                        <p>Author: {{ item['book_author'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

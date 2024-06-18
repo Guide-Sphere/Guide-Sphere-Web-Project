@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Course Search Page | GuideSphere</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage_styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+        <script>
+            function navigateTohomepage() {
+                // Redirect to homepage route
+                window.location.href = "/main";
+            }
+
+            function navigateTocoursesearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('coursesearchpage') }}";
+            }
+
+            function navigateTobooksearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('booksearchpage') }}";
+            }
+
+            function navigateTojobsearchpage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('jobsearchpage') }}";
+            }
+
+            function navigateTomyprofilepage() {
+                // Redirect to coursesearchpage route
+                window.location.href = "{{ url_for('myprofilepage', section='default') }}";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbarsub1">
+                <h3>GuideSphere</h3>
+            </div>
+            <div class="navbarsub2">
+                <a href="#" class="home-button" onclick="navigateTohomepage()">Home</a>
+                <div class="switch-buttons">
+                    <a href="#" class="active" onclick="navigateTocoursesearchpage()">Courses</a>
+                    <a href="#" onclick="navigateTobooksearchpage()">Books</a>
+                    <a href="#" onclick="navigateTojobsearchpage()">Jobs</a>
+                </div>
+                <form action="{{ url_for('searchresults') }}" method="GET" class="search-form">
+                    <input name="keyword" placeholder="Search here" required>
+                    <input type="hidden" name="pageid" value="1">
+                    <button type="submit">Search</button>
+                </form>
+                <button class="get-started" onclick="navigateTomyprofilepage()">My Profile</button>
+            </div>
+        </div>
+
+        <!-- Latest Courses Section -->
+        <h2 style="padding-left: 5%; margin-top: 7%;">Newly Added Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in recent_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Personalized Course Recommendation Section -->
+        <h2 style="padding-left: 5%;">Your Favourite Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in personalized_course_recommendations_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Top Rated Courses Section -->
+        <h2 style="padding-left: 5%;">Top Rated Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in top_rated_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- GIT Courses Section -->
+        <h2 style="padding-left: 5%;">GIT Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in git_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Apna College Courses Section -->
+        <h2 style="padding-left: 5%; ">Apna College Courses</h2>
+        <div class="items-container">
+            <div class="items-list">
+                {% for item in apna_college_courses_list %}
+                    <div class="item">
+                        <a href="{{ url_for('coursedetailspage', title=item['course_title']) }}">
+                            <img src="{{ item['course_img'] }}" alt="{{ item['course_title'] }}">
+                        </a>
+                        <h3>{{ item['course_title'] }}</h3>
+                        <p>Duration: {{ item['course_duration'] }}</p>    
+                    </div> 
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
